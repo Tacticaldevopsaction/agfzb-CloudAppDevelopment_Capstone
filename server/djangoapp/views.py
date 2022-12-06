@@ -3,9 +3,9 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
 # from .models import related models
-from .models import CarDealer, CarModel, CarMake, DealerReview, ReviewPost
+from .models import CarDealer, CarModel, CarMake, DealerReview
 # from .restapis import related methods
-from .restapis import get_dealers_from_cf, get_dealer_by_id_from_cf, get_dealer_reviews_from_cf, get_request
+from .restapis import get_dealers_from_cf, get_dealer_by_id_from_cf, get_dealer_reviews_from_cf, get_request, post_request
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from datetime import datetime
@@ -156,7 +156,7 @@ def add_review(request, dealer_id):
                 review["car_make"]=None
                 review["car_model"]=None
                 review["car_year"]=None
-            json_result = post_request("https://08663624.us-south.apigw.appdomain.cloud/api/review", review, dealerId=dealer_id)
+            json_result = post_request("https://us-south.functions.appdomain.cloud/api/v1/web/f2068c64-a7e4-4264-ae32-3ae6ae786879/appdevcapstoneproject/post_review", review, dealerId=dealer_id)
             print(json_result)
             if "error" in json_result:
                 context["message"] = "ERROR: Review was not submitted."
