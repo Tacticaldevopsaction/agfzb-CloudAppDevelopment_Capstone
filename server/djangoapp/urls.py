@@ -33,4 +33,4 @@ urlpatterns = [
     
     # path for add a review view
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)git push https://github.com/Tacticaldevopsaction/THE-Non-forked-created-agfzb-cloudappdevelopment_capstone-1.git
