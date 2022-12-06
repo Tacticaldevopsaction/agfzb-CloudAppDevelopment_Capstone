@@ -37,6 +37,17 @@ def get_request(url, **kwargs):
 
 # Create a `post_request` to make HTTP POST requests
 # e.g., response = requests.post(url, params=kwargs, json=payload)
+def post_request(url, payload, **kwargs):
+    print(url)
+    print(payload)
+    print(kwargs)
+    try:
+        response = requests.post(url, params=kwargs, json=payload)
+    except Exception as e:
+        print("Error" ,e)
+    print("Status Code ", {response.status_code})
+    data = json.loads(response.text)
+    return data
 
 
 # Create a get_dealers_from_cf method to get dealers from a cloud function
@@ -122,9 +133,9 @@ def get_dealer_by_id_from_cf(url, id):
 # - Call get_request() with specified arguments
 # - Get the returned sentiment label such as Positive or Negative
 def analyze_review_sentiments(dealerreview, **kwargs):
-    API_KEY="MxFCXuNdAY4i7RdB1PTx0LGspyMbNVmVOKxtpJ5XPxkz"
-    #API_KEY="0614ccd0-1e9f-4d49-923e-e7741f963747:Q3ZX2R1b3oBEb0XebEO99rpulJ31yoY7X5GfjoQykN4RpM9eThYrrs14If0aOHtG"
-    NLU_URL='https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/93a549ab-8f15-404e-a8ed-97f6fb8a35aa/v1/analyze?version=2020-08-01'
+    API_KEY="dbOmdJUaAc12oe4eUpAmADXpKhU4LjERfh1DHpdjtMuQ"
+    #API_KEY="dbOmdJUaAc12oe4eUpAmADXpKhU4LjERfh1DHpdjtMuQ"
+    NLU_URL='https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/89c7587f-692c-405b-899c-a6b539bdbed6'
     params = json.dumps({"text": dealerreview, "features": {"sentiment": {}}})
     response = requests.post(NLU_URL,data=params,headers={'Content-Type':'application/json'},auth=HTTPBasicAuth("apikey", API_KEY))
     
