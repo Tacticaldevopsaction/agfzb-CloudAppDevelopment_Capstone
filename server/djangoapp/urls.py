@@ -13,10 +13,10 @@ urlpatterns = [
     # path for about view
     
     #NOTED week 1 T4
-    path(route='about', view=views.about, name='about'),
+    path(route='about/', view=views.about, name='about'),
 
     # path for contact us view
-    path(route='contact', view=views.contact, name='contact'),
+    path(route='contact/', view=views.contact, name='contact'),
 
 
     # path for registration
@@ -32,6 +32,7 @@ urlpatterns = [
      path('dealer/<int:dealer_id>/', view=views.get_dealer_details, name='dealer_details'),
     
     # path for add a review view
-    path(route='addreview/<int:dealer_id>/', view=views.add_review, name='add_review')
+    #path(route='dealer/<int:dealer_id>/add_review/', views.add_review, name='add_review')
+    #path(route='addreview/<int:dealer_id>/', view=views.add_review, name='add_review')
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

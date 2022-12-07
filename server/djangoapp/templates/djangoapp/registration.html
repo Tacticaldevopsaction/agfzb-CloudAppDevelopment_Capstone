@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     {% load static %}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+    
+    <title>Register Please</title>
 </head>
     <body>
         <nav class="navbar navbar-light bg-light">
@@ -24,7 +32,7 @@
                             {% csrf_token %}
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Username" name="username" >
-                                <input type="password" class="form-control" placeholder="Username" name="psw" >
+                                <input type="password" class="form-control" placeholder="Password" name="psw" >
                                 <button class="btn btn-primary" type="submit">Login</button>
                                 <a class="btn btn-link" href="{% url 'djangoapp:registration' %}">Sign Up</a>
                             </div>
@@ -35,74 +43,32 @@
             </div>
         </nav>
     <!--Add a registration form here -->
-    <main role="main" class="container pt-3">
-        
-        {% if reviews %}
-        <div class="card-columns">
-            {% for review in reviews %}
+    <main role="main" class="d-flex justify-content-center pt-3 ">
+        <form class="border border-dark p-4 w-auto h-auto text-center bg-light" action="{% url 'djangoapp:registration' %}"  method="post">
+            {% csrf_token %}
             
-                <div class="card" >
-                    <div class="card-header">
-                        <img class="card-img-left" src="{{MEDIA_URL}}/emoji/{{review.sentiment}}.png" width="40" height="40">
-                    </div>
-                    
-                     <div class="card-body text-center">
-                        <h5 class="card-title">{{review.name}}</h5>
-                        <p class="card-text">{{review.review}}</p>
-                     </div>
-                     <div class="card-footer text-muted text-center" style="min-height: 74px;">
-                    {% if review.purchase == True%}   
-                        {{review.car_year}} {{review.car_make}} {{review.car_model}}
-                        <br>
-                        Purchased on: {{review.purchase_date}}
-                    {% else %}
-                        <br>
-                        Reviewer did not make a purchase.
-                    {% endif %}
-                    </div>
-                </div>
-                
-            {% endfor %}
-            <div class="card ">
-                     <div class="card-header">
-                            <h5 class="card-title text-center pt-1">Write Your Own Review!</h5>
-                    </div>
-                    <div class="card-body text-center">
-                        <p class="card-text">Want to review this dealership?</p>
-                        <p class="card-text">Click the button below!</p>
-                    </div>
-                    <div class="card-footer text-center" style="min-height: 74px;">
-                        {% if user.is_authenticated %}
-                            <a class="btn btn-warning btn-lg" type="submit" href="{% url 'djangoapp:add_review' dealer_id %}">Write a Review!</a>
-                        {% else %}
-                            <p class="btn btn-success btn-lg" disabled>Login to write a review!</p>
-                        {% endif %}
-                    </div>
-                     
-                </div>
-            </div>
-        {% else %}
-            <div class="card">
-                     <div class="card-header">
-                            <h5 class="card-title text-center">No Reviews</h5>
-                    </div>
-                    <div class="card-body">
-                    
-                    
-                    <p class="card-text text-center">There are no reviews for this dealership. Be the first to write one!</p>
-
-                    </div>
-                    <div class="card-footer text-center" style="min-height: 74px;">
-                        {% if user.is_authenticated %}
-                            <a class="btn btn-warning btn-lg" type="submit" href="{% url 'djangoapp:add_review' dealer_id %}">Write a Review!</a>
-                        {% else %}
-                            <p class="btn btn-success nohover">Login to write a review!</p>
-                        {% endif %}
-                    </div>
-                     
-                </div>
-        {% endif %}
+            <h1 class="text-center">Sign Up!</h1><br>
+            <label for="username"><b>User Name</b></label>
+            <br>
+            <input type="text" placeholder="Enter User Name: " name="username" required>
+            <br>
+            <label for="firstname"><b>First Name</b></label>
+            <br>
+            <input type="text" placeholder="Enter First Name: " name="firstname" required>
+            <br>
+            <label for="lastname"><b>Last Name</b></label>
+            <br>
+            <input type="text" placeholder="Enter Last Name: " name="lastname" required>
+            <br>
+            <label for="psw"><b>Password</b></label>
+            <br>
+            <input type="password" placeholder="Enter Password: " name="psw" required>
+            <br>
+            <br>
+            <button class="btn btn-warning btn-lg" type="submit">Sign Up</button>
+        </form>
     </main>
+
     </body>
     <footer class="navbar navbar-expand-md navbar-dark fixed-bottom bg-dark">
         <div class="container">
