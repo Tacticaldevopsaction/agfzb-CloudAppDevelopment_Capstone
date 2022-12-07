@@ -63,16 +63,15 @@
                     <th data-field="address">Address</th>
                     <th data-field="zip">Zip</th>
                     <th data-field="state" data-filter-control="select">State</th>
-                    <th data-field="longitude" data-filter-control="select">Longitude</th>
-                    <th data-field="lattitutde" data-filter-control="select">Lattitude</th>
+                    <th data-field="longitude">Longitude</th>
+                    <th data-field="lattitutde">Lattitude</th>
                 </tr>
             </thead>
-             <body>
+             <tbody>
                 {% for dealer in dealership_list %}
                     <tr>
                         <td>{{dealer.id}}</td>
-                        
-                        <td>{{dealer.full_name}}</td>
+                        <td><a href="{% url 'djangoapp:dealer_details' dealer.id %}">{{dealer.full_name}}</a></td>
                         <td>{{dealer.city}}</td>
                         <td>{{dealer.address}}</td>
                         <td>{{dealer.zip}}</td>
@@ -81,7 +80,7 @@
                         <td>{{dealer.lat}}</td>
                     </tr>
                     {% endfor %}
-                </body>
+                </tbody>
            </table>
            </div>
            <footer class="fixed-bottom">
@@ -98,4 +97,9 @@
           © 2022 Jeronimo, Inc. Terms Privacy
         </div>
     </footer>
+    <script>
+        $(function() {
+          $('#table').bootstrapTable()
+        })
+      </script>    
 </html>
