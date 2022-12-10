@@ -1,8 +1,13 @@
-import uuid
-import json
-import datetime
+from pydoc import describe
+from unicodedata import name
+from unittest.util import _MAX_LENGTH
 from django.db import models
 from django.utils.timezone import now
+from django.db import models
+from django.core import serializers
+from django.utils.timezone import now
+import uuid
+import json
 
 
 # Car Make model
@@ -22,11 +27,27 @@ class CarModel(models.Model):
     SUV = 'SUV'
     WAGON = 'Wagon'
     MINIVAN = 'Minivan'
+    CUV = 'CUV'
+    HATCHBACK = 'Hatchback'
+    LIMOUSINE = 'Limousine'
+    GETAWAYCAR = 'Getawaycar'
+    FORMULA1 = 'Formula1'
+    BATMOBILE = 'Batmobile'
+    MACH5 = 'Mach5'
+    SPORTS_CAR = 'Sports Car'
     CAR_TYPES = [
         (SEDAN, 'Sedan'),
         (SUV, 'SUV'),
         (WAGON, 'Wagon'),
-        (MINIVAN, 'Minivan')
+        (MINIVAN, 'Minivan'),
+        (CUV, 'CUV'),
+        (HATCHBACK, 'Hatchback'),
+        (LIMOUSINE, 'Limousine'),
+        (GETAWAYCAR, 'Getawaycar'),
+        (FORMULA1, 'Formula1'),
+        (BATMOBILE, 'Batmobile'),
+        (MACH5, 'Mach5'),
+        (SPORTS_CAR, 'Sports car')
     ]
 
     type = models.CharField(
@@ -42,55 +63,29 @@ class CarModel(models.Model):
         return "Name: " + self.name
 
 
-
 # <HINT> Create a plain Python class `CarDealer` to hold dealer data
 class CarDealer:
-    def __init__(self, address, city, full_name, id, 
-                    lat, long, short_name, st, zip):
+
+    def __init__(self, address, city, full_name, id, lat, long, short_name, st, zip):
+        # Dealer address
         self.address = address
+        # Dealer city
         self.city = city
+        # Dealer Full Name
         self.full_name = full_name
+        # Dealer id
         self.id = id
+        # Location lat
         self.lat = lat
+        # Location long
         self.long = long
+        # Dealer short name
         self.short_name = short_name
+        # Dealer state
         self.st = st
+        # Dealer zip
         self.zip = zip
 
     def __str__(self):
-        return self.full_name
-
-
+        return "Dealer name: " + self.full_name
 # <HINT> Create a plain Python class `DealerReview` to hold review data
-class DealerReview:
-    def __init__(self, dealership, name, purchase, review):
-        self.make = ""
-        self.car_model = ""
-        self.car_year = ""
-        self.dealership = dealership
-        self.id = ""  # The id of the review
-        self.name = name  # Name of the reviewer
-        self.purchase = purchase  # Did the reviewer purchase the car? bool
-        self.purchase_date = ""
-        self.review = review  # The actual review text
-        self.sentiment = ""  # Watson NLU sentiment analysis of review
-
-    def __str__(self):
-        return "Reviewer: " + self.name + " Review: " + self.review
-    
-
-class ReviewPost:
-
-    def __init__(self, dealership, name, purchase, review):
-        self.dealership = dealership
-        self.name = name
-        self.purchase = purchase
-        self.review = review
-        self.purchase_date = ""
-        self.car_make = ""
-        self.car_model = ""
-        self.car_year = ""
-
-    def to_json(self):
-        return json.dumps(self, default=lambda o: o.__dict__,
-                            sort_keys=True, indent=4)
